@@ -18,13 +18,21 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
     if(CEH_BUILD_TESTS)
         enable_testing()
+
         add_executable(test_big_int tests/test_big_int.cpp)
         target_link_libraries(test_big_int PRIVATE ceh::ceh)
         add_test(NAME big_int COMMAND test_big_int)
+
+        add_executable(test_fraction tests/test_fraction.cpp)
+        target_link_libraries(test_fraction PRIVATE ceh::ceh)
+        add_test(NAME fraction COMMAND test_fraction)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
         add_executable(big_int_example examples/big_int_example.cpp)
         target_link_libraries(big_int_example PRIVATE ceh::ceh)
+
+        add_executable(fraction_example examples/fraction_example.cpp)
+        target_link_libraries(fraction_example PRIVATE ceh::ceh)
     endif()
 endif()

@@ -2,6 +2,7 @@
 
 > 一组现代化、header-only 的 C++ 增强头文件库 —— 把常用的算法、数据结构与实用工具，做成「拿来即用」的预制组件。
 
+[![CI](https://github.com/YKZStudio/CppEnhancedHeaders/actions/workflows/ci.yml/badge.svg)](https://github.com/YKZStudio/CppEnhancedHeaders/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![C++17](https://img.shields.io/badge/C%2B%2B-17%2F20-blue.svg)](https://isocpp.org/)
 [![Header Only](https://img.shields.io/badge/header--only-yes-brightgreen.svg)](#)
@@ -30,7 +31,7 @@
 |------|------|------|
 | ✅ | `BigInt` | 任意精度整数（高精度加减乘除、取模、快速幂、比较、流 I/O） |
 | ⬜ | `BigDecimal` | 任意精度定点/浮点小数 |
-| ⬜ | `Fraction` | 有理数（自动约分的分数类型） |
+| ✅ | `Fraction` | 有理数（基于 BigInt，自动约分、负指数幂、to_double） |
 | ⬜ | `SafeInt` | 带溢出检测的整数包装 |
 | ⬜ | `Complex` | 增强版复数（与标准库互操作） |
 
