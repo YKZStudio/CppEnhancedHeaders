@@ -34,6 +34,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_complex tests/test_complex.cpp)
         target_link_libraries(test_complex PRIVATE ceh::ceh)
         add_test(NAME complex COMMAND test_complex)
+
+        add_executable(test_big_decimal tests/test_big_decimal.cpp)
+        target_link_libraries(test_big_decimal PRIVATE ceh::ceh)
+        add_test(NAME big_decimal COMMAND test_big_decimal)
+
+        add_executable(test_binary_search_tree tests/test_binary_search_tree.cpp)
+        target_link_libraries(test_binary_search_tree PRIVATE ceh::ceh)
+        add_test(NAME binary_search_tree COMMAND test_binary_search_tree)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -48,5 +56,11 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(complex_example examples/complex_example.cpp)
         target_link_libraries(complex_example PRIVATE ceh::ceh)
+
+        add_executable(big_decimal_example examples/big_decimal_example.cpp)
+        target_link_libraries(big_decimal_example PRIVATE ceh::ceh)
+
+        add_executable(binary_search_tree_example examples/binary_search_tree_example.cpp)
+        target_link_libraries(binary_search_tree_example PRIVATE ceh::ceh)
     endif()
 endif()
