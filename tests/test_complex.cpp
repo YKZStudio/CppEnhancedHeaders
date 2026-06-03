@@ -12,6 +12,9 @@ using C = ceh::Complex<double>;
 
 static int g_checks = 0;
 
+// M_PI 非标准（MSVC 默认不提供），用本地常量保证跨编译器可移植
+static constexpr double kPi = 3.14159265358979323846;
+
 #define CHECK_TRUE(expr)                                               \
     do {                                                               \
         ++g_checks;                                                    \
@@ -48,15 +51,15 @@ int main() {
     CHECK_TRUE(ceq(C(3, 4).conj(), 3, -4));
     CHECK_TRUE(close(C(3, 4).abs(), 5.0));
     CHECK_TRUE(close(C(3, 4).norm(), 25.0));
-    CHECK_TRUE(close(C(0, 1).arg(), M_PI / 2));
-    CHECK_TRUE(close(C(-1, 0).arg(), M_PI));
+    CHECK_TRUE(close(C(0, 1).arg(), kPi / 2));
+    CHECK_TRUE(close(C(-1, 0).arg(), kPi));
 
     // 一元负号
     CHECK_TRUE(ceq(-C(3, -4), -3, 4));
 
     // 极坐标构造
-    CHECK_TRUE(ceq(C::polar(1.0, M_PI), -1, 0));
-    CHECK_TRUE(ceq(C::polar(2.0, M_PI / 2), 0, 2));
+    CHECK_TRUE(ceq(C::polar(1.0, kPi), -1, 0));
+    CHECK_TRUE(ceq(C::polar(2.0, kPi / 2), 0, 2));
 
     // 整数幂（含 0 次与负幂）
     CHECK_TRUE(ceq(C(0, 1).pow(2), -1, 0));          // i^2 = -1
