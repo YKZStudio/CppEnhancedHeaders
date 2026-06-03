@@ -26,6 +26,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_fraction tests/test_fraction.cpp)
         target_link_libraries(test_fraction PRIVATE ceh::ceh)
         add_test(NAME fraction COMMAND test_fraction)
+
+        add_executable(test_safe_int tests/test_safe_int.cpp)
+        target_link_libraries(test_safe_int PRIVATE ceh::ceh)
+        add_test(NAME safe_int COMMAND test_safe_int)
+
+        add_executable(test_complex tests/test_complex.cpp)
+        target_link_libraries(test_complex PRIVATE ceh::ceh)
+        add_test(NAME complex COMMAND test_complex)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -34,5 +42,11 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(fraction_example examples/fraction_example.cpp)
         target_link_libraries(fraction_example PRIVATE ceh::ceh)
+
+        add_executable(safe_int_example examples/safe_int_example.cpp)
+        target_link_libraries(safe_int_example PRIVATE ceh::ceh)
+
+        add_executable(complex_example examples/complex_example.cpp)
+        target_link_libraries(complex_example PRIVATE ceh::ceh)
     endif()
 endif()
