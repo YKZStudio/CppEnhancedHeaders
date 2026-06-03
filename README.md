@@ -1,6 +1,6 @@
 # CppEnhancedHeaders
 
-> 一组现代化、header-only 的 C++ 增强头文件库 —— 把常用的算法、数据结构与实用工具，做成「拿来即用」的预制组件。
+> 一组现代化、header-only 的 C++ 增强头文件库 —— 把常用的算法、数据结构、实用工具与终端 UI，做成「拿来即用」的预制组件。
 
 [![CI](https://github.com/YKZStudio/CppEnhancedHeaders/actions/workflows/ci.yml/badge.svg)](https://github.com/YKZStudio/CppEnhancedHeaders/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
@@ -30,7 +30,7 @@
 | 状态 | 组件 | 说明 |
 |------|------|------|
 | ✅ | `BigInt` | 任意精度整数（高精度加减乘除、取模、快速幂、比较、流 I/O） |
-| ⬜ | `BigDecimal` | 任意精度定点/浮点小数 |
+| ✅ | `BigDecimal` | 任意精度十进制小数（基于 BigInt，多种舍入模式、精确十进制运算） |
 | ✅ | `Fraction` | 有理数（基于 BigInt，自动约分、负指数幂、to_double） |
 | ✅ | `SafeInt` | 带溢出检测的整数包装（溢出/除零抛异常，跨编译器一致） |
 | ✅ | `Complex` | 增强版复数（与 std::complex 互操作、整数幂、极坐标、a+bi 输出） |
@@ -38,7 +38,7 @@
 ### 数据结构 `ceh/structures`
 | 状态 | 组件 | 说明 |
 |------|------|------|
-| ⬜ | `BinaryTree` / `BST` | 二叉树 / 二叉搜索树 |
+| ✅ | `BinarySearchTree` | 二叉搜索树（增删查、三序遍历、min/max、高度、深拷贝、自定义比较器） |
 | ⬜ | `AVLTree` | 自平衡 AVL 树 |
 | ⬜ | `RedBlackTree` | 红黑树 |
 | ⬜ | `Trie` | 字典树（前缀树） |
@@ -65,6 +65,48 @@
 | ⬜ | `Logger` | 轻量日志 |
 | ⬜ | `StringUtils` | 字符串拆分、修剪、格式化 |
 | ⬜ | `Random` | 易用的随机数封装 |
+
+### 终端 UI `ceh/ui`
+
+> 灵感来自 [FTXUI](https://github.com/ArthurSonzogni/FTXUI) 与 Python 的
+> [Rich](https://github.com/Textualize/rich)：把「在终端里画出漂亮的表格、面板、
+> 进度条、树状结构」这类需求，做成纯头文件、零外部依赖的组件。仅依赖标准库 +
+> 各平台终端能力探测，跨 Linux / macOS / Windows（含 Windows 10+ 的 ANSI 支持）。
+
+**渲染基础**
+
+| 状态 | 组件 | 说明 |
+|------|------|------|
+| ⬜ | `Color` / `Style` | ANSI 颜色与文本样式（16 / 256 / truecolor，粗体、斜体、下划线、反色，前景/背景） |
+| ⬜ | `Text` | 富文本片段：带样式拼接、对齐、截断、自动换行，正确处理 CJK 全角宽度 |
+| ⬜ | `Console` | 终端输出封装：样式标记解析、TTY 检测、终端宽高探测、光标控制 |
+| ⬜ | `Rule` | 水平分隔线（可带居中标题） |
+
+**组件 / 控件**
+
+| 状态 | 组件 | 说明 |
+|------|------|------|
+| ⬜ | `Table` | 表格：表头、列对齐、自动列宽，多种边框风格（方角 / 圆角 / 双线 / 无框） |
+| ⬜ | `Panel` | 带边框与标题的面板（可嵌套、内边距、对齐） |
+| ⬜ | `Tree` | 树形结构渲染（缩进与连接线，可对接 `ceh::BinarySearchTree`） |
+| ⬜ | `ProgressBar` | 进度条：百分比、速率、已用 / 剩余时间（ETA），多任务进度组 |
+| ⬜ | `Spinner` | 加载动画（多种帧风格） |
+| ⬜ | `Markdown` | 简易 Markdown 渲染（标题 / 列表 / 强调 / 代码块 / 分隔线） |
+
+**布局 / 绘图 / 交互**
+
+| 状态 | 组件 | 说明 |
+|------|------|------|
+| ⬜ | `Layout` | 盒式布局：水平 / 垂直容器、flex 伸缩、分割窗格（参考 FTXUI 的 hbox / vbox） |
+| ⬜ | `Canvas` | 字符画布：点 / 线 / 矩形，盲文（Braille）子像素绘制、折线图 |
+| ⬜ | `Live` | 可刷新的实时区域：原地重绘、帧率控制 |
+| ⬜ | `Prompt` | 交互式输入：文本 / 确认（y-n）/ 单选 / 多选菜单 |
+
+> **设计构想**：底层先做好 `Color`/`Style`/`Text`/`Console` 四件套（负责样式与
+> 宽度计算），上层组件（`Table`、`Panel`、`ProgressBar` 等）都把自己渲染成
+> `Text` 行再交给 `Console` 输出；`Layout`/`Canvas` 提供二维拼接与绘图能力，
+> `Live`/`Prompt` 负责动态刷新与交互。所有组件遵循库的统一约定：header-only、
+> `ceh::ui::` 命名空间、零外部依赖。
 
 ---
 
@@ -95,7 +137,7 @@ target_link_libraries(your_app PRIVATE ceh::ceh)
 
 ```cpp
 #include <ceh/types/big_int.hpp>
-#include <ceh/structures/binary_tree.hpp>
+#include <ceh/structures/binary_search_tree.hpp>
 #include <iostream>
 
 int main() {
@@ -105,7 +147,7 @@ int main() {
     std::cout << "100! = " << factorial << '\n';
 
     // 二叉搜索树
-    ceh::BST<int> tree;
+    ceh::BinarySearchTree<int> tree;
     for (int v : {5, 3, 8, 1, 4}) tree.insert(v);
     std::cout << "中序遍历: ";
     tree.inorder([](int v) { std::cout << v << ' '; });
@@ -126,6 +168,7 @@ CppEnhancedHeaders/
 │       ├── structures/     # 数据结构
 │       ├── algorithms/     # 算法
 │       ├── utils/          # 实用工具
+│       ├── ui/             # 终端 UI（规划中）
 │       └── ceh.hpp         # 一键引入全部
 ├── examples/               # 使用示例
 ├── tests/                  # 单元测试
