@@ -61,10 +61,10 @@
 ### 实用工具 `ceh/utils`
 | 状态 | 组件 | 说明 |
 |------|------|------|
-| ⬜ | `Timer` | 计时 / 性能测量 |
-| ⬜ | `Logger` | 轻量日志 |
-| ⬜ | `StringUtils` | 字符串拆分、修剪、格式化 |
-| ⬜ | `Random` | 易用的随机数封装 |
+| ✅ | `Timer` | 计时 / 性能测量（累计/暂停、ScopedTimer、measure_ms，基于 steady_clock） |
+| ✅ | `Logger` | 轻量日志（级别过滤、可选时间戳、线程安全、输出到任意 ostream） |
+| ✅ | `StringUtils` | 字符串工具（split/join/trim/大小写/前后缀/replace_all/repeat） |
+| ✅ | `Random` | 随机数封装（区间整数/实数、布尔、choice、shuffle，固定种子可复现） |
 
 ### 终端 UI `ceh/ui`
 

@@ -16,6 +16,9 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     option(CEH_BUILD_TESTS    "Build CppEnhancedHeaders tests"    ON)
     option(CEH_BUILD_EXAMPLES "Build CppEnhancedHeaders examples" ON)
 
+    # 部分 utils（Timer / Logger）用到 std::thread / std::mutex，需要线程库
+    find_package(Threads REQUIRED)
+
     if(CEH_BUILD_TESTS)
         enable_testing()
 
@@ -54,6 +57,22 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_search tests/test_search.cpp)
         target_link_libraries(test_search PRIVATE ceh::ceh)
         add_test(NAME search COMMAND test_search)
+
+        add_executable(test_timer tests/test_timer.cpp)
+        target_link_libraries(test_timer PRIVATE ceh::ceh Threads::Threads)
+        add_test(NAME timer COMMAND test_timer)
+
+        add_executable(test_random tests/test_random.cpp)
+        target_link_libraries(test_random PRIVATE ceh::ceh)
+        add_test(NAME random COMMAND test_random)
+
+        add_executable(test_string_utils tests/test_string_utils.cpp)
+        target_link_libraries(test_string_utils PRIVATE ceh::ceh)
+        add_test(NAME string_utils COMMAND test_string_utils)
+
+        add_executable(test_logger tests/test_logger.cpp)
+        target_link_libraries(test_logger PRIVATE ceh::ceh Threads::Threads)
+        add_test(NAME logger COMMAND test_logger)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -83,5 +102,17 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(search_example examples/search_example.cpp)
         target_link_libraries(search_example PRIVATE ceh::ceh)
+
+        add_executable(timer_example examples/timer_example.cpp)
+        target_link_libraries(timer_example PRIVATE ceh::ceh Threads::Threads)
+
+        add_executable(random_example examples/random_example.cpp)
+        target_link_libraries(random_example PRIVATE ceh::ceh)
+
+        add_executable(string_utils_example examples/string_utils_example.cpp)
+        target_link_libraries(string_utils_example PRIVATE ceh::ceh)
+
+        add_executable(logger_example examples/logger_example.cpp)
+        target_link_libraries(logger_example PRIVATE ceh::ceh)
     endif()
 endif()
