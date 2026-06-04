@@ -42,6 +42,18 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_binary_search_tree tests/test_binary_search_tree.cpp)
         target_link_libraries(test_binary_search_tree PRIVATE ceh::ceh)
         add_test(NAME binary_search_tree COMMAND test_binary_search_tree)
+
+        add_executable(test_math tests/test_math.cpp)
+        target_link_libraries(test_math PRIVATE ceh::ceh)
+        add_test(NAME math COMMAND test_math)
+
+        add_executable(test_sort tests/test_sort.cpp)
+        target_link_libraries(test_sort PRIVATE ceh::ceh)
+        add_test(NAME sort COMMAND test_sort)
+
+        add_executable(test_search tests/test_search.cpp)
+        target_link_libraries(test_search PRIVATE ceh::ceh)
+        add_test(NAME search COMMAND test_search)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -62,5 +74,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(binary_search_tree_example examples/binary_search_tree_example.cpp)
         target_link_libraries(binary_search_tree_example PRIVATE ceh::ceh)
+
+        add_executable(math_example examples/math_example.cpp)
+        target_link_libraries(math_example PRIVATE ceh::ceh)
+
+        add_executable(sort_example examples/sort_example.cpp)
+        target_link_libraries(sort_example PRIVATE ceh::ceh)
+
+        add_executable(search_example examples/search_example.cpp)
+        target_link_libraries(search_example PRIVATE ceh::ceh)
     endif()
 endif()
