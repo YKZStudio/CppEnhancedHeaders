@@ -83,6 +83,8 @@ public:
     Fraction operator+() const { return *this; }
 
     // ---- 四则 ----
+    // 通分：a/b ± c/d = (a·d ± c·b)/(b·d)，a/b · c/d = (a·c)/(b·d)；
+    // 结果交给构造函数自动约分并规范化符号。
     Fraction operator+(const Fraction& o) const {
         return Fraction(num_ * o.den_ + o.num_ * den_, den_ * o.den_);
     }

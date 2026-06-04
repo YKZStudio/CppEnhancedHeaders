@@ -76,6 +76,8 @@ public:
     }
 
     void log(LogLevel level, const std::string& message) {
+        // 过滤依赖 LogLevel 的声明顺序（Trace < Debug < ... < Error < Off）：
+        // 低于当前阈值的消息直接丢弃；以 Off 为级别记录也一律丢弃。
         if (level == LogLevel::Off || level < level_) return;
         std::lock_guard<std::mutex> lock(mtx_);
         if (timestamp_) (*out_) << current_timestamp() << ' ';

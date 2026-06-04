@@ -69,6 +69,7 @@ void quick_sort(RandomIt first, RandomIt last, Compare comp = Compare{}) {
     auto n = last - first;
     if (n < 2) return;
     if (n <= 16) {
+        // 小区间插入排序更快，同时充当快排递归的基线，避免对短段过度递归
         insertion_sort(first, last, comp);
         return;
     }

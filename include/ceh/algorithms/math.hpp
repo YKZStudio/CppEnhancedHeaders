@@ -146,6 +146,7 @@ T extended_gcd(T a, T b, T& x, T& y) {
         y = 0;
         return a;
     }
+    // 递归解出 b·x1 + (a%b)·y1 = g，再回代（a%b = a - ⌊a/b⌋·b）得本层的 x、y
     T x1, y1;
     T g = extended_gcd(b, static_cast<T>(a % b), x1, y1);
     x = y1;
