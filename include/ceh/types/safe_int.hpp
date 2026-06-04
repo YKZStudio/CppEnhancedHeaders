@@ -75,6 +75,8 @@ public:
     SafeInt operator*(const SafeInt& o) const {
         const T a = v_, b = o.v_;
         if (a == 0 || b == 0) return SafeInt(0);
+        // 按 a、b 正负分四种象限，用除法（而非乘法）预判 a*b 是否越过 kMax/kMin，
+        // 从而在真正相乘之前就发现溢出（参考 CERT INT32-C）。
         bool bad;
         if (a > 0) {
             bad = (b > 0) ? (a > kMax / b) : (b < kMin / a);

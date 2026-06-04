@@ -154,11 +154,13 @@ private:
             node = std::move(node->left);           // 仅左孩子
             --size_;
         } else {
-            // 两个孩子：用右子树最小值（中序后继）替换，再删掉后继
+            // 两个孩子：用右子树最小值（中序后继）替换当前值，再到右子树删掉后继。
+            // 后继是右子树的「最左」结点，必无左孩子，故其删除只会落到上面的
+            // 叶子 / 单孩子分支，不会无限递归；size_ 也由那次递归统一维护。
             Node* succ = node->right.get();
             while (succ->left) succ = succ->left.get();
             node->value = succ->value;
-            erase_node(node->right, succ->value);   // 该递归负责 --size_
+            erase_node(node->right, succ->value);
         }
         return true;
     }

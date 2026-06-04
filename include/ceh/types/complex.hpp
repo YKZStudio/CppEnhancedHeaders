@@ -89,7 +89,8 @@ public:
         Complex base = *this;
         unsigned n;
         if (exp < 0) {
-            base = Complex(1) / base;
+            base = Complex(1) / base;                      // 负幂：底数取倒数
+            // |exp| 写成 -(exp+1)+1，避免 exp == INT_MIN 时 -exp 溢出
             n = static_cast<unsigned>(-(exp + 1)) + 1u;
         } else {
             n = static_cast<unsigned>(exp);

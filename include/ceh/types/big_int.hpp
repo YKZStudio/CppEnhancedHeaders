@@ -159,6 +159,7 @@ public:
     bool operator>=(const BigInt& o) const { return compare(o) >= 0; }
 
     // ---- 快速幂（exp 必须非负）----
+    // 平方-乘法：按 exp 的二进制位，把对应的 base^(2^k) 乘入结果，共 O(log exp) 次乘法
     BigInt pow(unsigned long long exp) const {
         BigInt result(1), base = *this;
         while (exp > 0) {
@@ -174,7 +175,9 @@ public:
         if (mag_.empty()) return "0";
         std::string s;
         if (neg_) s.push_back('-');
-        s += std::to_string(mag_.back());
+        s += std::to_string(mag_.back());   // 最高肢：正常输出，不补零
+        // 其余每肢必须补满 BASE_DIGITS(9) 位，否则会丢掉肢内的前导零
+        // （如肢值 42 实际代表 "000000042"）；i-- > 0 从次高肢遍历到最低肢
         char buf[16];
         for (std::size_t i = mag_.size() - 1; i-- > 0;) {
             std::snprintf(buf, sizeof(buf), "%09u", mag_[i]);
@@ -286,8 +289,10 @@ private:
         return r;
     }
 
+    // 课本式 O(n·m) 乘法：逐肢相乘累加再统一进位
     static std::vector<std::uint32_t> mul_mag(const std::vector<std::uint32_t>& a,
                                               const std::vector<std::uint32_t>& b) {
+        // 结果最多 a.size()+b.size() 肢；acc 用 64 位，足以容纳「肢积(<1e18)+进位」不溢出
         std::vector<std::uint64_t> acc(a.size() + b.size(), 0);
         for (std::size_t i = 0; i < a.size(); ++i) {
             std::uint64_t carry = 0;
@@ -336,16 +341,17 @@ private:
             cur.insert(cur.begin(), a[i]);
             while (!cur.empty() && cur.back() == 0) cur.pop_back();
 
-            // 二分找最大的 d 使得 b*d <= cur
+            // 二分找最大的商肢 d（0..BASE-1），使 b*d <= cur。
+            // lo/hi 是 uint32，故在两端额外 break，避免 mid±1 发生回绕（上溢/下溢）。
             std::uint32_t lo = 0, hi = BASE - 1, d = 0;
             while (lo <= hi) {
                 std::uint32_t mid = lo + (hi - lo) / 2;
                 if (cmp_mag(mul_scalar(b, mid), cur) <= 0) {
                     d = mid;
-                    if (mid == BASE - 1) break;
+                    if (mid == BASE - 1) break;   // 否则 lo = mid+1 会上溢回 0
                     lo = mid + 1;
                 } else {
-                    if (mid == 0) break;
+                    if (mid == 0) break;          // 否则 hi = mid-1 会下溢到 UINT32_MAX
                     hi = mid - 1;
                 }
             }
