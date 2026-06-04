@@ -41,11 +41,11 @@
 | ✅ | `BinarySearchTree` | 二叉搜索树（增删查、三序遍历、min/max、高度、深拷贝、自定义比较器） |
 | ⬜ | `AVLTree` | 自平衡 AVL 树 |
 | ⬜ | `RedBlackTree` | 红黑树 |
-| ⬜ | `Trie` | 字典树（前缀树） |
-| ⬜ | `Heap` | 二叉堆 / 可合并堆 |
+| ✅ | `Trie` | 字典树（增删查、前缀计数 count_prefix/starts_with，删除自动回收分支） |
+| ✅ | `Heap` | 二叉堆（泛型 + 比较器，大/小顶堆，O(n) 建堆，priority_queue 同约定） |
 | ⬜ | `Graph` | 图（邻接表/邻接矩阵） |
 | ⬜ | `LinkedList` | 增强版双向链表 |
-| ⬜ | `DisjointSet` | 并查集（路径压缩 + 按秩合并） |
+| ✅ | `DisjointSet` | 并查集（路径压缩 + 按大小合并，集合数/集合大小查询） |
 | ⬜ | `SkipList` | 跳表 |
 
 ### 算法 `ceh/algorithms`

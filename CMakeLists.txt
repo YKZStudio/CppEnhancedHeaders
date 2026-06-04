@@ -73,6 +73,18 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_logger tests/test_logger.cpp)
         target_link_libraries(test_logger PRIVATE ceh::ceh Threads::Threads)
         add_test(NAME logger COMMAND test_logger)
+
+        add_executable(test_disjoint_set tests/test_disjoint_set.cpp)
+        target_link_libraries(test_disjoint_set PRIVATE ceh::ceh)
+        add_test(NAME disjoint_set COMMAND test_disjoint_set)
+
+        add_executable(test_heap tests/test_heap.cpp)
+        target_link_libraries(test_heap PRIVATE ceh::ceh)
+        add_test(NAME heap COMMAND test_heap)
+
+        add_executable(test_trie tests/test_trie.cpp)
+        target_link_libraries(test_trie PRIVATE ceh::ceh)
+        add_test(NAME trie COMMAND test_trie)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -114,5 +126,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(logger_example examples/logger_example.cpp)
         target_link_libraries(logger_example PRIVATE ceh::ceh)
+
+        add_executable(disjoint_set_example examples/disjoint_set_example.cpp)
+        target_link_libraries(disjoint_set_example PRIVATE ceh::ceh)
+
+        add_executable(heap_example examples/heap_example.cpp)
+        target_link_libraries(heap_example PRIVATE ceh::ceh)
+
+        add_executable(trie_example examples/trie_example.cpp)
+        target_link_libraries(trie_example PRIVATE ceh::ceh)
     endif()
 endif()
