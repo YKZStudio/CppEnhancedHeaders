@@ -89,6 +89,18 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_style tests/test_style.cpp)
         target_link_libraries(test_style PRIVATE ceh::ceh)
         add_test(NAME style COMMAND test_style)
+
+        add_executable(test_text tests/test_text.cpp)
+        target_link_libraries(test_text PRIVATE ceh::ceh)
+        add_test(NAME text COMMAND test_text)
+
+        add_executable(test_rule tests/test_rule.cpp)
+        target_link_libraries(test_rule PRIVATE ceh::ceh)
+        add_test(NAME rule COMMAND test_rule)
+
+        add_executable(test_console tests/test_console.cpp)
+        target_link_libraries(test_console PRIVATE ceh::ceh)
+        add_test(NAME console COMMAND test_console)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -142,5 +154,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(style_example examples/style_example.cpp)
         target_link_libraries(style_example PRIVATE ceh::ceh)
+
+        add_executable(text_example examples/text_example.cpp)
+        target_link_libraries(text_example PRIVATE ceh::ceh)
+
+        add_executable(rule_example examples/rule_example.cpp)
+        target_link_libraries(rule_example PRIVATE ceh::ceh)
+
+        add_executable(console_example examples/console_example.cpp)
+        target_link_libraries(console_example PRIVATE ceh::ceh)
     endif()
 endif()
