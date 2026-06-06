@@ -3,8 +3,8 @@
 // Tree —— 树形结构的缩进渲染（header-only），位于 ceh::ui。
 //
 // 每个 Tree 既是一个结点也是一棵子树，递归持有子结点。render() 用 ├─ └─ │
-// 连接线画出层级。每个结点可带样式。子结点容器用 std::deque，保证 add_child
-// 返回的引用在继续添加兄弟结点后依然有效，方便链式构建。
+// 连接线画出层级。每个结点可带样式。子结点容器用 std::list：它支持不完整类型
+// （递归持有自身），且 push_back 不使已有元素引用失效，方便链式构建。
 //
 // 用法：
 //     using namespace ceh::ui;
@@ -21,7 +21,7 @@
 #include <ceh/ui/style.hpp>
 
 #include <cstddef>
-#include <deque>
+#include <list>
 #include <string>
 
 namespace ceh {
@@ -54,21 +54,22 @@ public:
 private:
     std::string label_;
     Style style_;
-    std::deque<Tree> children_;
+    std::list<Tree> children_;
 
     std::string styled_label(bool with_style) const {
         return with_style ? style_.apply(label_) : label_;
     }
 
     void render_children(std::string& out, const std::string& prefix, bool with_style) const {
-        for (std::size_t i = 0; i < children_.size(); ++i) {
-            const bool last = (i + 1 == children_.size());
+        std::size_t i = 0, n = children_.size();
+        for (const Tree& child : children_) {   // std::list 无 operator[]，改用迭代
+            const bool last = (++i == n);
             out += '\n';
             out += prefix;
             out += last ? "└─ " : "├─ ";
-            out += children_[i].styled_label(with_style);
+            out += child.styled_label(with_style);
             // 子树的延续：最后一个孩子下方留空，否则保留竖线
-            children_[i].render_children(out, prefix + (last ? "   " : "│  "), with_style);
+            child.render_children(out, prefix + (last ? "   " : "│  "), with_style);
         }
     }
 };
