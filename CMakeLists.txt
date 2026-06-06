@@ -101,6 +101,30 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_console tests/test_console.cpp)
         target_link_libraries(test_console PRIVATE ceh::ceh)
         add_test(NAME console COMMAND test_console)
+
+        add_executable(test_table tests/test_table.cpp)
+        target_link_libraries(test_table PRIVATE ceh::ceh)
+        add_test(NAME table COMMAND test_table)
+
+        add_executable(test_panel tests/test_panel.cpp)
+        target_link_libraries(test_panel PRIVATE ceh::ceh)
+        add_test(NAME panel COMMAND test_panel)
+
+        add_executable(test_tree tests/test_tree.cpp)
+        target_link_libraries(test_tree PRIVATE ceh::ceh)
+        add_test(NAME ui_tree COMMAND test_tree)
+
+        add_executable(test_progress_bar tests/test_progress_bar.cpp)
+        target_link_libraries(test_progress_bar PRIVATE ceh::ceh)
+        add_test(NAME progress_bar COMMAND test_progress_bar)
+
+        add_executable(test_spinner tests/test_spinner.cpp)
+        target_link_libraries(test_spinner PRIVATE ceh::ceh)
+        add_test(NAME spinner COMMAND test_spinner)
+
+        add_executable(test_markdown tests/test_markdown.cpp)
+        target_link_libraries(test_markdown PRIVATE ceh::ceh)
+        add_test(NAME markdown COMMAND test_markdown)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -163,5 +187,23 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(console_example examples/console_example.cpp)
         target_link_libraries(console_example PRIVATE ceh::ceh)
+
+        add_executable(table_example examples/table_example.cpp)
+        target_link_libraries(table_example PRIVATE ceh::ceh)
+
+        add_executable(panel_example examples/panel_example.cpp)
+        target_link_libraries(panel_example PRIVATE ceh::ceh)
+
+        add_executable(tree_example examples/tree_example.cpp)
+        target_link_libraries(tree_example PRIVATE ceh::ceh)
+
+        add_executable(progress_bar_example examples/progress_bar_example.cpp)
+        target_link_libraries(progress_bar_example PRIVATE ceh::ceh)
+
+        add_executable(spinner_example examples/spinner_example.cpp)
+        target_link_libraries(spinner_example PRIVATE ceh::ceh)
+
+        add_executable(markdown_example examples/markdown_example.cpp)
+        target_link_libraries(markdown_example PRIVATE ceh::ceh)
     endif()
 endif()
