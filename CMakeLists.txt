@@ -85,6 +85,10 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_trie tests/test_trie.cpp)
         target_link_libraries(test_trie PRIVATE ceh::ceh)
         add_test(NAME trie COMMAND test_trie)
+
+        add_executable(test_style tests/test_style.cpp)
+        target_link_libraries(test_style PRIVATE ceh::ceh)
+        add_test(NAME style COMMAND test_style)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -135,5 +139,8 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(trie_example examples/trie_example.cpp)
         target_link_libraries(trie_example PRIVATE ceh::ceh)
+
+        add_executable(style_example examples/style_example.cpp)
+        target_link_libraries(style_example PRIVATE ceh::ceh)
     endif()
 endif()
