@@ -125,6 +125,22 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         add_executable(test_markdown tests/test_markdown.cpp)
         target_link_libraries(test_markdown PRIVATE ceh::ceh)
         add_test(NAME markdown COMMAND test_markdown)
+
+        add_executable(test_layout tests/test_layout.cpp)
+        target_link_libraries(test_layout PRIVATE ceh::ceh)
+        add_test(NAME layout COMMAND test_layout)
+
+        add_executable(test_canvas tests/test_canvas.cpp)
+        target_link_libraries(test_canvas PRIVATE ceh::ceh)
+        add_test(NAME canvas COMMAND test_canvas)
+
+        add_executable(test_live tests/test_live.cpp)
+        target_link_libraries(test_live PRIVATE ceh::ceh)
+        add_test(NAME live COMMAND test_live)
+
+        add_executable(test_prompt tests/test_prompt.cpp)
+        target_link_libraries(test_prompt PRIVATE ceh::ceh)
+        add_test(NAME prompt COMMAND test_prompt)
     endif()
 
     if(CEH_BUILD_EXAMPLES)
@@ -205,5 +221,17 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(markdown_example examples/markdown_example.cpp)
         target_link_libraries(markdown_example PRIVATE ceh::ceh)
+
+        add_executable(layout_example examples/layout_example.cpp)
+        target_link_libraries(layout_example PRIVATE ceh::ceh)
+
+        add_executable(canvas_example examples/canvas_example.cpp)
+        target_link_libraries(canvas_example PRIVATE ceh::ceh)
+
+        add_executable(live_example examples/live_example.cpp)
+        target_link_libraries(live_example PRIVATE ceh::ceh Threads::Threads)
+
+        add_executable(prompt_example examples/prompt_example.cpp)
+        target_link_libraries(prompt_example PRIVATE ceh::ceh)
     endif()
 endif()
