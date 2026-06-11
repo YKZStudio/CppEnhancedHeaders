@@ -58,6 +58,18 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         target_link_libraries(test_search PRIVATE ceh::ceh)
         add_test(NAME search COMMAND test_search)
 
+        add_executable(test_string_algo tests/test_string_algo.cpp)
+        target_link_libraries(test_string_algo PRIVATE ceh::ceh)
+        add_test(NAME string_algo COMMAND test_string_algo)
+
+        add_executable(test_graph tests/test_graph.cpp)
+        target_link_libraries(test_graph PRIVATE ceh::ceh)
+        add_test(NAME graph COMMAND test_graph)
+
+        add_executable(test_dp tests/test_dp.cpp)
+        target_link_libraries(test_dp PRIVATE ceh::ceh)
+        add_test(NAME dp COMMAND test_dp)
+
         add_executable(test_timer tests/test_timer.cpp)
         target_link_libraries(test_timer PRIVATE ceh::ceh Threads::Threads)
         add_test(NAME timer COMMAND test_timer)
@@ -170,6 +182,15 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(search_example examples/search_example.cpp)
         target_link_libraries(search_example PRIVATE ceh::ceh)
+
+        add_executable(string_algo_example examples/string_algo_example.cpp)
+        target_link_libraries(string_algo_example PRIVATE ceh::ceh)
+
+        add_executable(graph_example examples/graph_example.cpp)
+        target_link_libraries(graph_example PRIVATE ceh::ceh)
+
+        add_executable(dp_example examples/dp_example.cpp)
+        target_link_libraries(dp_example PRIVATE ceh::ceh)
 
         add_executable(timer_example examples/timer_example.cpp)
         target_link_libraries(timer_example PRIVATE ceh::ceh Threads::Threads)
