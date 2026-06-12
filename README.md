@@ -39,8 +39,8 @@
 | 状态 | 组件 | 说明 |
 |------|------|------|
 | ✅ | `BinarySearchTree` | 二叉搜索树（增删查、三序遍历、min/max、高度、深拷贝、自定义比较器） |
-| ⬜ | `AVLTree` | 自平衡 AVL 树 |
-| ⬜ | `RedBlackTree` | 红黑树 |
+| ✅ | `AVLTree` | 自平衡 AVL 树（旋转保持高度平衡，增删查 O(log n)） |
+| ✅ | `RedBlackTree` | 红黑树（CLRS 风格 nil 哨兵，增删查 O(log n)） |
 | ✅ | `Trie` | 字典树（增删查、前缀计数 count_prefix/starts_with，删除自动回收分支） |
 | ✅ | `Heap` | 二叉堆（泛型 + 比较器，大/小顶堆，O(n) 建堆，priority_queue 同约定） |
 | ✅ | `Graph` | 图（邻接表，见 `ceh::Graph`：BFS/DFS、Dijkstra、拓扑排序、连通分量） |
