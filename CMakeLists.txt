@@ -98,6 +98,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         target_link_libraries(test_trie PRIVATE ceh::ceh)
         add_test(NAME trie COMMAND test_trie)
 
+        add_executable(test_linked_list tests/test_linked_list.cpp)
+        target_link_libraries(test_linked_list PRIVATE ceh::ceh)
+        add_test(NAME linked_list COMMAND test_linked_list)
+
+        add_executable(test_skip_list tests/test_skip_list.cpp)
+        target_link_libraries(test_skip_list PRIVATE ceh::ceh)
+        add_test(NAME skip_list COMMAND test_skip_list)
+
         add_executable(test_style tests/test_style.cpp)
         target_link_libraries(test_style PRIVATE ceh::ceh)
         add_test(NAME style COMMAND test_style)
@@ -212,6 +220,12 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(trie_example examples/trie_example.cpp)
         target_link_libraries(trie_example PRIVATE ceh::ceh)
+
+        add_executable(linked_list_example examples/linked_list_example.cpp)
+        target_link_libraries(linked_list_example PRIVATE ceh::ceh)
+
+        add_executable(skip_list_example examples/skip_list_example.cpp)
+        target_link_libraries(skip_list_example PRIVATE ceh::ceh)
 
         add_executable(style_example examples/style_example.cpp)
         target_link_libraries(style_example PRIVATE ceh::ceh)
