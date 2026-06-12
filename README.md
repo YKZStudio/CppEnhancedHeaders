@@ -43,10 +43,10 @@
 | ⬜ | `RedBlackTree` | 红黑树 |
 | ✅ | `Trie` | 字典树（增删查、前缀计数 count_prefix/starts_with，删除自动回收分支） |
 | ✅ | `Heap` | 二叉堆（泛型 + 比较器，大/小顶堆，O(n) 建堆，priority_queue 同约定） |
-| ⬜ | `Graph` | 图（邻接表/邻接矩阵） |
-| ⬜ | `LinkedList` | 增强版双向链表 |
+| ✅ | `Graph` | 图（邻接表，见 `ceh::Graph`：BFS/DFS、Dijkstra、拓扑排序、连通分量） |
+| ✅ | `LinkedList` | 双向链表（头尾 O(1)、按下标增删查、反转、深拷贝、移动） |
 | ✅ | `DisjointSet` | 并查集（路径压缩 + 按大小合并，集合数/集合大小查询） |
-| ⬜ | `SkipList` | 跳表 |
+| ✅ | `SkipList` | 跳表（概率型有序集合，期望 O(log n)，自定义比较器） |
 
 ### 算法 `ceh/algorithms`
 | 状态 | 组件 | 说明 |
