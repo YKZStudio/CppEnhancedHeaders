@@ -106,6 +106,14 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
         target_link_libraries(test_skip_list PRIVATE ceh::ceh)
         add_test(NAME skip_list COMMAND test_skip_list)
 
+        add_executable(test_avl_tree tests/test_avl_tree.cpp)
+        target_link_libraries(test_avl_tree PRIVATE ceh::ceh)
+        add_test(NAME avl_tree COMMAND test_avl_tree)
+
+        add_executable(test_red_black_tree tests/test_red_black_tree.cpp)
+        target_link_libraries(test_red_black_tree PRIVATE ceh::ceh)
+        add_test(NAME red_black_tree COMMAND test_red_black_tree)
+
         add_executable(test_style tests/test_style.cpp)
         target_link_libraries(test_style PRIVATE ceh::ceh)
         add_test(NAME style COMMAND test_style)
@@ -226,6 +234,12 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
 
         add_executable(skip_list_example examples/skip_list_example.cpp)
         target_link_libraries(skip_list_example PRIVATE ceh::ceh)
+
+        add_executable(avl_tree_example examples/avl_tree_example.cpp)
+        target_link_libraries(avl_tree_example PRIVATE ceh::ceh)
+
+        add_executable(red_black_tree_example examples/red_black_tree_example.cpp)
+        target_link_libraries(red_black_tree_example PRIVATE ceh::ceh)
 
         add_executable(style_example examples/style_example.cpp)
         target_link_libraries(style_example PRIVATE ceh::ceh)
